@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="估值建模 绝对估值法 绝对估值法基本原理 相对估值法建立在假设价值来源于未来现金流，以合理的折现率将未来现金流折回加总得到相应价值： $$ V = \sum^{\infin}{i=1}{\frac{CF{t}}{(1&#43;r_t)^{t}}} $$ ![image-20200805143349848](/Users/baduiya/Library/Application Support/typora-user-images/image-20200805143349848.png)
+ 折现率的选择取决于使用现金的种类，二者需要匹配。例如对红利和股权自由现金流折现选择股权资本成本，对无杠杆自由现金流使用加权平均资本成本（WACC）
+ def pv(c,r,n,when=1): &amp;#39;&amp;#39;&amp;#39; c表示cashflow，c=[100,90,80,120] r贴现率，也可以每期不一样，如相应的，r=[2%,3%,2%,4%] n为期数 when=1表示期末计数，默认，即普通年金 when=0表示期初计数，即预付年金 &amp;#39;&amp;#39;&amp;#39; c=np.array(c) r=np.array(r) if when==1: n=np.arange(1,n&#43;1) else: n=np.arange(0,n) pv=c/(1&#43;r)**n return pv.sum() 绝对估值法一般形式 两阶段模型 相对估值法建立在对未来经营状况的正确预估，但预估期越长将越难保证准确。因此，常见的是将的未来现金流分为两期：
+ 详细预测期：此期间对公司收入、成本项目做详细的预测 终值期：以详细预测期最后一期简直作为永续年金处理  $$ V = \sum^{n}{i=1}{\frac{CF{t}}{(1&#43;r_t)^{t}}} &#43; \frac{TV}{(1&#43;r)^n} $$
+GORDEN永续增长年金 假设在详细预测期后现金流以一个稳定的增长率$g$增长
+![image-20200805164807140](/Users/baduiya/Library/Application Support/typora-user-images/image-20200805164807140.png) $$ V = \sum^{n}{i=1}{\frac{CF{t}}{(1&#43;r_t)^{t}}} &#43; \frac{CF_n \times (1&#43;g)}{(r-g)(1&#43;r)^{n}} $$
+终值倍数法 假设在详细预测期后公司将出售，按详细预测期最后一期的某个指标一定倍数估算终值
+$$ V = \sum^{n}{i=1}{\frac{CF{t}}{(1&#43;r_t)^{t}}} &#43; \frac{某个指标_n \times 该指标对应的退出倍数}{(1&#43;r)^n} $$" />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://YangruiWang.github.io/post/%E4%BC%B0%E5%80%BC%E5%BB%BA%E6%A8%A1/" />
+
+
+    <title>
+        
+             :: 当汪不阿摸鱼的时候在想什么 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.d1ea4af8fd04fb24a4f8b882ea54bd04eb245427ca4baf527c81a5dab071410b.css">
+
+
+
+
+
+
+<meta itemprop="name" content="">
+<meta itemprop="description" content="估值建模 绝对估值法 绝对估值法基本原理 相对估值法建立在假设价值来源于未来现金流，以合理的折现率将未来现金流折回加总得到相应价值： $$ V = \sum^{\infin}{i=1}{\frac{CF{t}}{(1&#43;r_t)^{t}}} $$ ![image-20200805143349848](/Users/baduiya/Library/Application Support/typora-user-images/image-20200805143349848.png)
+ 折现率的选择取决于使用现金的种类，二者需要匹配。例如对红利和股权自由现金流折现选择股权资本成本，对无杠杆自由现金流使用加权平均资本成本（WACC）
+ def pv(c,r,n,when=1): &#39;&#39;&#39; c表示cashflow，c=[100,90,80,120] r贴现率，也可以每期不一样，如相应的，r=[2%,3%,2%,4%] n为期数 when=1表示期末计数，默认，即普通年金 when=0表示期初计数，即预付年金 &#39;&#39;&#39; c=np.array(c) r=np.array(r) if when==1: n=np.arange(1,n&#43;1) else: n=np.arange(0,n) pv=c/(1&#43;r)**n return pv.sum() 绝对估值法一般形式 两阶段模型 相对估值法建立在对未来经营状况的正确预估，但预估期越长将越难保证准确。因此，常见的是将的未来现金流分为两期：
+ 详细预测期：此期间对公司收入、成本项目做详细的预测 终值期：以详细预测期最后一期简直作为永续年金处理  $$ V = \sum^{n}{i=1}{\frac{CF{t}}{(1&#43;r_t)^{t}}} &#43; \frac{TV}{(1&#43;r)^n} $$
+GORDEN永续增长年金 假设在详细预测期后现金流以一个稳定的增长率$g$增长
+![image-20200805164807140](/Users/baduiya/Library/Application Support/typora-user-images/image-20200805164807140.png) $$ V = \sum^{n}{i=1}{\frac{CF{t}}{(1&#43;r_t)^{t}}} &#43; \frac{CF_n \times (1&#43;g)}{(r-g)(1&#43;r)^{n}} $$
+终值倍数法 假设在详细预测期后公司将出售，按详细预测期最后一期的某个指标一定倍数估算终值
+$$ V = \sum^{n}{i=1}{\frac{CF{t}}{(1&#43;r_t)^{t}}} &#43; \frac{某个指标_n \times 该指标对应的退出倍数}{(1&#43;r)^n} $$">
+
+<meta itemprop="wordCount" content="108">
+
+
+
+<meta itemprop="keywords" content="" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="估值建模 绝对估值法 绝对估值法基本原理 相对估值法建立在假设价值来源于未来现金流，以合理的折现率将未来现金流折回加总得到相应价值： $$ V = \sum^{\infin}{i=1}{\frac{CF{t}}{(1&#43;r_t)^{t}}} $$ ![image-20200805143349848](/Users/baduiya/Library/Application Support/typora-user-images/image-20200805143349848.png)
+ 折现率的选择取决于使用现金的种类，二者需要匹配。例如对红利和股权自由现金流折现选择股权资本成本，对无杠杆自由现金流使用加权平均资本成本（WACC）
+ def pv(c,r,n,when=1): &#39;&#39;&#39; c表示cashflow，c=[100,90,80,120] r贴现率，也可以每期不一样，如相应的，r=[2%,3%,2%,4%] n为期数 when=1表示期末计数，默认，即普通年金 when=0表示期初计数，即预付年金 &#39;&#39;&#39; c=np.array(c) r=np.array(r) if when==1: n=np.arange(1,n&#43;1) else: n=np.arange(0,n) pv=c/(1&#43;r)**n return pv.sum() 绝对估值法一般形式 两阶段模型 相对估值法建立在对未来经营状况的正确预估，但预估期越长将越难保证准确。因此，常见的是将的未来现金流分为两期：
+ 详细预测期：此期间对公司收入、成本项目做详细的预测 终值期：以详细预测期最后一期简直作为永续年金处理  $$ V = \sum^{n}{i=1}{\frac{CF{t}}{(1&#43;r_t)^{t}}} &#43; \frac{TV}{(1&#43;r)^n} $$
+GORDEN永续增长年金 假设在详细预测期后现金流以一个稳定的增长率$g$增长
+![image-20200805164807140](/Users/baduiya/Library/Application Support/typora-user-images/image-20200805164807140.png) $$ V = \sum^{n}{i=1}{\frac{CF{t}}{(1&#43;r_t)^{t}}} &#43; \frac{CF_n \times (1&#43;g)}{(r-g)(1&#43;r)^{n}} $$
+终值倍数法 假设在详细预测期后公司将出售，按详细预测期最后一期的某个指标一定倍数估算终值
+$$ V = \sum^{n}{i=1}{\frac{CF{t}}{(1&#43;r_t)^{t}}} &#43; \frac{某个指标_n \times 该指标对应的退出倍数}{(1&#43;r)^n} $$"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://YangruiWang.github.io/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">hello</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://YangruiWang.github.io/about/">About</a></li><li><a href="https://YangruiWang.github.io/posts/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="https://YangruiWang.github.io/post/%E4%BC%B0%E5%80%BC%E5%BB%BA%E6%A8%A1/"></a></h2>
+
+            
+
+            <div class="post-content">
+                <h1 id="估值建模">估值建模</h1>
+<h2 id="绝对估值法">绝对估值法</h2>
+<h3 id="绝对估值法基本原理">绝对估值法基本原理</h3>
+<p>相对估值法建立在假设价值来源于未来现金流，以合理的折现率将未来现金流折回加总得到相应价值：
+$$
+V = \sum^{\infin}<em>{i=1}{\frac{CF</em>{t}}{(1+r_t)^{t}}}
+$$
+![image-20200805143349848](/Users/baduiya/Library/Application Support/typora-user-images/image-20200805143349848.png)</p>
+<blockquote>
+<p>折现率的选择取决于使用现金的种类，二者需要匹配。例如对红利和股权自由现金流折现选择股权资本成本，对无杠杆自由现金流使用加权平均资本成本（WACC）</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pv</span>(c,r,n,when<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>):
+    <span style="color:#e6db74">&#39;&#39;&#39;
+</span><span style="color:#e6db74">    c表示cashflow，c=[100,90,80,120]
+</span><span style="color:#e6db74">    r贴现率，也可以每期不一样，如相应的，r=[2%,3%,2%,4%]
+</span><span style="color:#e6db74">    n为期数
+</span><span style="color:#e6db74">    when=1表示期末计数，默认，即普通年金
+</span><span style="color:#e6db74">    when=0表示期初计数，即预付年金
+</span><span style="color:#e6db74">    &#39;&#39;&#39;</span>
+    c<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>array(c)       
+    r<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>array(r) 
+    <span style="color:#66d9ef">if</span> when<span style="color:#f92672">==</span><span style="color:#ae81ff">1</span>:
+        n<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">1</span>,n<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
+    <span style="color:#66d9ef">else</span>:
+        n<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>,n)
+    pv<span style="color:#f92672">=</span>c<span style="color:#f92672">/</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">+</span>r)<span style="color:#f92672">**</span>n
+    <span style="color:#66d9ef">return</span> pv<span style="color:#f92672">.</span>sum()
+</code></pre></div><h3 id="绝对估值法一般形式">绝对估值法一般形式</h3>
+<h4 id="两阶段模型">两阶段模型</h4>
+<p>相对估值法建立在对未来经营状况的正确预估，但预估期越长将越难保证准确。因此，常见的是将的未来现金流分为两期：</p>
+<ol>
+<li>详细预测期：此期间对公司收入、成本项目做详细的预测</li>
+<li>终值期：以详细预测期最后一期简直作为<strong>永续年金</strong>处理</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div><p>$$
+V = \sum^{n}<em>{i=1}{\frac{CF</em>{t}}{(1+r_t)^{t}}} + \frac{TV}{(1+r)^n}
+$$</p>
+<h5 id="gorden永续增长年金">GORDEN永续增长年金</h5>
+<p>假设在<strong>详细预测期</strong>后现金流以一个稳定的增长率$g$增长</p>
+<p>![image-20200805164807140](/Users/baduiya/Library/Application Support/typora-user-images/image-20200805164807140.png)
+$$
+V = \sum^{n}<em>{i=1}{\frac{CF</em>{t}}{(1+r_t)^{t}}} + \frac{CF_n \times (1+g)}{(r-g)(1+r)^{n}}
+$$</p>
+<h5 id="终值倍数法">终值倍数法</h5>
+<p>假设在<strong>详细预测期</strong>后公司将出售，按详细预测期最后一期的某个指标一定倍数估算终值</p>
+<p>$$
+V = \sum^{n}<em>{i=1}{\frac{CF</em>{t}}{(1+r_t)^{t}}} + \frac{某个指标_n \times 该指标对应的退出倍数}{(1+r)^n}
+$$</p>
+<blockquote>
+<p>红利折现、股权自由现金流折现，可用市盈率、市净率等做倍数</p>
+<p>无杠杆自由现金流折现，常用最后一年经营利润或EBIT或EBITDA乘以适当倍数</p>
+</blockquote>
+<h3 id="六种具体的绝对估值法">六种具体的绝对估值法</h3>
+<h4 id="红利折现模型">红利折现模型</h4>
+<p>持有股票有两种现金流的流入：分红和期末卖出，因此红利折现模型一般形式为：
+$$
+P_0 = \sum^{n}<em>{i=1}{\frac{DPS</em>{t}}{(1+r_t)^{t}}} + \frac{P_n}{(1+r)^{n}}
+$$
+GORDEN永续年金形式：
+$$
+P_0 = \sum^{n}<em>{i=1}{\frac{DPS</em>{t}}{(1+r_t)^{t}}} + \frac{DPS_n \times (1+g)}{(r-g)(1+r)^{n}}
+$$
+终值倍数形式：
+$$
+P_n = EPS_n \times PE_n\<br>
+P_0 = \sum^{n}<em>{i=1}{\frac{DPS</em>{t}}{(1+r_t)^{t}}} + \frac{EPS_n \times PE_n}{(1+r)^{n}}
+$$</p>
+<h4 id="自由现金流模型">自由现金流模型</h4>
+<h4 id="净资产价值模型">净资产价值模型</h4>
+<h4 id="经济增加值折现模型">经济增加值折现模型</h4>
+<h4 id="调整现值法">调整现值法</h4>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+            
+            <span> <a href="https://YangruiWang.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>
