@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on 当汪不阿摸鱼的时候在想什么</title>
-    <link>https://YangruiWang.github.io/post/</link>
+    <link>https://baduiya.top/post/</link>
     <description>Recent content in Posts on 当汪不阿摸鱼的时候在想什么</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     
-	<atom:link href="https://YangruiWang.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://baduiya.top/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title></title>
-      <link>https://YangruiWang.github.io/post/%E4%BC%B0%E5%80%BC%E5%BB%BA%E6%A8%A1/</link>
+      <link>https://baduiya.top/post/%E4%BC%B0%E5%80%BC%E5%BB%BA%E6%A8%A1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://YangruiWang.github.io/post/%E4%BC%B0%E5%80%BC%E5%BB%BA%E6%A8%A1/</guid>
+      <guid>https://baduiya.top/post/%E4%BC%B0%E5%80%BC%E5%BB%BA%E6%A8%A1/</guid>
       <description>估值建模 绝对估值法 绝对估值法基本原理 相对估值法建立在假设价值来源于未来现金流，以合理的折现率将未来现金流折回加总得到相应价值： $$ V = \sum^{\infin}{i=1}{\frac{CF{t}}{(1+r_t)^{t}}} $$ ![image-20200805143349848](/Users/baduiya/Library/Application Support/typora-user-images/image-20200805143349848.png)
  折现率的选择取决于使用现金的种类，二者需要匹配。例如对红利和股权自由现金流折现选择股权资本成本，对无杠杆自由现金流使用加权平均资本成本（WACC）
  def pv(c,r,n,when=1): &amp;#39;&amp;#39;&amp;#39; c表示cashflow，c=[100,90,80,120] r贴现率，也可以每期不一样，如相应的，r=[2%,3%,2%,4%] n为期数 when=1表示期末计数，默认，即普通年金 when=0表示期初计数，即预付年金 &amp;#39;&amp;#39;&amp;#39; c=np.array(c) r=np.array(r) if when==1: n=np.arange(1,n+1) else: n=np.arange(0,n) pv=c/(1+r)**n return pv.sum() 绝对估值法一般形式 两阶段模型 相对估值法建立在对未来经营状况的正确预估，但预估期越长将越难保证准确。因此，常见的是将的未来现金流分为两期：
